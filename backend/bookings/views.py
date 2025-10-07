@@ -30,14 +30,13 @@ class BookSeatView(APIView):
         request=None,
         responses=BookingSerializer,
         examples=[
-            OpenApiExample("Book seat", value={"show_id": 1, "seat_number": 5}, request_only=True),
+            OpenApiExample("Book seat", value={"seat_number": 5}, request_only=True),
         ],
     )
-    def post(self, request):
-        show_id = request.data.get("show_id")
+    def post(self, request, show_id):
         seat_number = request.data.get("seat_number")
-        if not show_id or not seat_number:
-            return Response({"detail": "show_id and seat_number are required"}, status=status.HTTP_400_BAD_REQUEST)
+        if not seat_number:
+            return Response({"detail": "seat_number is required"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             seat_number = int(seat_number)
         except ValueError:
@@ -69,11 +68,7 @@ class BookSeatView(APIView):
 class CancelBookingView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request):
-        booking_id = request.data.get("booking_id")
-        if not booking_id:
-            return Response({"detail": "booking_id is required"}, status=status.HTTP_400_BAD_REQUEST)
-
+    def post(self, request, booking_id):
         with transaction.atomic():
             try:
                 booking = Booking.objects.select_for_update().get(id=booking_id, user=request.user)
