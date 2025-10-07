@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { api } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
@@ -9,6 +10,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const emailValid = useMemo(() => /.+@.+\..+/.test(email), [email]);
   const usernameValid = useMemo(() => username.trim().length >= 3, [username]);
@@ -25,10 +27,7 @@ export default function SignupPage() {
         method: "POST",
         body: JSON.stringify({ username, email, password }),
       });
-      setMessage("Signup successful. You can now log in.");
-      setUsername("");
-      setEmail("");
-      setPassword("");
+      router.replace("/login");
     } catch (err: any) {
       setMessage(err.message || "Signup failed");
     } finally {

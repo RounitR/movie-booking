@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { api } from "@/lib/api";
 import Link from "next/link";
+import { use } from "react";
 
-export default function ShowBookingPage({ params }: { params: { id: string } }) {
-  const showId = params.id;
+type Params = Promise<{ id: string }>;
+
+export default function ShowBookingPage({ params }: { params: Params }) {
+  const { id: showId } = use(params);
   const [seat, setSeat] = useState<number | "">("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);

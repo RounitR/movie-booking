@@ -3,12 +3,14 @@
 import { useMemo, useState } from "react";
 import { api } from "@/lib/api";
 import { setTokens, Tokens } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const usernameValid = useMemo(() => username.trim().length >= 3, [username]);
   const passwordValid = useMemo(() => password.length >= 8, [password]);
@@ -25,9 +27,7 @@ export default function LoginPage() {
         body: JSON.stringify({ username, password }),
       });
       setTokens(tokens);
-      setMessage("Login successful.");
-      setUsername("");
-      setPassword("");
+      router.replace("/");
     } catch (err: any) {
       setMessage(err.message || "Login failed");
     } finally {

@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import Link from "next/link";
+import { use } from "react";
+
+type Params = Promise<{ id: string }>;
 
 type Show = {
   id: number;
@@ -12,8 +15,8 @@ type Show = {
   movie: { id: number; title: string };
 };
 
-export default function MovieShowsPage({ params }: { params: { id: string } }) {
-  const movieId = params.id;
+export default function MovieShowsPage({ params }: { params: Params }) {
+  const { id: movieId } = use(params);
   const [shows, setShows] = useState<Show[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
