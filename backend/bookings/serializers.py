@@ -19,3 +19,7 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = ["id", "show", "seat_number", "status", "created_at"]
+
+
+class BookSeatRequestSerializer(serializers.Serializer):
+    seat_number = serializers.IntegerField(min_value=1)
