@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # Redirect root path to Swagger UI
+    path("", RedirectView.as_view(url="/swagger/", permanent=False), name="root-redirect"),
     path("", include("accounts.urls")),
     path("", include("bookings.urls")),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
