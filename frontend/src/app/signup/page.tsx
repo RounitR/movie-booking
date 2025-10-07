@@ -37,9 +37,9 @@ export default function SignupPage() {
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-4">Signup</h1>
-      <form onSubmit={onSubmit} className="max-w-md flex flex-col gap-3">
+    <div className="max-w-md mx-auto p-6">
+      <h1 className="text-xl font-semibold mb-4">Signup</h1>
+      <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <div>
           <input
             className="border rounded p-2 w-full"

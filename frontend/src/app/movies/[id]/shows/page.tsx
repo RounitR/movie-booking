@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import Link from "next/link";
 
 type Show = {
   id: number;
@@ -31,19 +32,22 @@ export default function MovieShowsPage({ params }: { params: { id: string } }) {
   }, [movieId]);
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-4">Shows</h1>
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-xl font-semibold mb-4">Shows</h1>
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-600">{error}</p>}
       <ul className="grid gap-3">
         {shows.map((s) => (
-          <li key={s.id} className="border rounded p-3">
-            <div className="font-semibold">{s.movie.title} - {s.screen_name}</div>
+          <li key={s.id} className="border rounded p-4">
+            <div className="font-medium">{s.movie.title} - {s.screen_name}</div>
             <div className="text-sm text-gray-600">{new Date(s.date_time).toLocaleString()} · {s.total_seats} seats</div>
-            <a className="text-blue-600 hover:underline" href={`/shows/${s.id}`}>Book seat</a>
+            <Link className="text-blue-600 hover:underline" href={`/shows/${s.id}`}>Book seat</Link>
           </li>
         ))}
       </ul>
+      <div className="mt-4">
+        <Link className="text-blue-600 hover:underline" href="/movies">Back to Movies</Link>
+      </div>
     </div>
   );
 }

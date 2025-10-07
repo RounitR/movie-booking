@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { api } from "@/lib/api";
+import Link from "next/link";
 
 export default function ShowBookingPage({ params }: { params: { id: string } }) {
   const showId = params.id;
@@ -29,9 +30,9 @@ export default function ShowBookingPage({ params }: { params: { id: string } }) 
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-4">Book a Seat</h1>
-      <form onSubmit={onSubmit} className="max-w-md flex flex-col gap-3">
+    <div className="max-w-md mx-auto p-6">
+      <h1 className="text-xl font-semibold mb-4">Book a Seat</h1>
+      <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <input
           className="border rounded p-2"
           placeholder="Seat number"
@@ -50,6 +51,9 @@ export default function ShowBookingPage({ params }: { params: { id: string } }) 
         </button>
       </form>
       {message && <p className="mt-3 text-sm">{message}</p>}
+      <div className="mt-4">
+        <Link className="text-blue-600 hover:underline" href={`/movies/${showId}/shows`}>Back to Shows</Link>
+      </div>
     </div>
   );
 }

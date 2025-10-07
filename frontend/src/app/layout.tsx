@@ -1,42 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Movie Booking",
-  description: "Book movies and manage your bookings",
+  description: "Clean and simple movie booking UI",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={geistSans.variable + " " + geistMono.variable}>
-        <header className="p-4 border-b flex items-center justify-between">
-          <a href="/" className="font-semibold">Movie Booking</a>
-          <nav className="flex gap-4">
-            <a href="/movies">Movies</a>
-            <a href="/my-bookings">My Bookings</a>
-            <a href="/signup">Signup</a>
-            <a href="/login">Login</a>
-            <a href="http://localhost:8010/swagger/" target="_blank" rel="noreferrer">API Docs</a>
-          </nav>
+      <body>
+        <header className="border-b">
+          <div className="max-w-5xl mx-auto p-4 flex items-center justify-between">
+            <Link href="/" className="font-semibold">Movie Booking</Link>
+            <nav className="flex gap-4 text-sm">
+              <Link className="hover:underline" href="/movies">Movies</Link>
+              <Link className="hover:underline" href="/my-bookings">My Bookings</Link>
+              <Link className="hover:underline" href="/signup">Signup</Link>
+              <Link className="hover:underline" href="/login">Login</Link>
+            </nav>
+          </div>
         </header>
-        <main className="p-6 max-w-5xl mx-auto">{children}</main>
+        <main className="max-w-5xl mx-auto p-4">
+          {children}
+        </main>
       </body>
     </html>
   );
