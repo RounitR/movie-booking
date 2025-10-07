@@ -6,7 +6,7 @@ Full-stack Movie Ticket Booking System.
 - Frontend: Next.js (TypeScript, Tailwind)
 
 Repository Structure
-- Django backend at repo root
+- Django backend in /backend
 - Next.js frontend in /frontend
 
 Setup instructions and detailed docs will be added after implementation phases.
