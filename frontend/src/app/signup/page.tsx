@@ -15,7 +15,7 @@ export default function SignupPage() {
     setLoading(true);
     setMessage(null);
     try {
-      await api("/accounts/signup/", {
+      await api("/signup", {
         method: "POST",
         body: JSON.stringify({ username, email, password }),
       });

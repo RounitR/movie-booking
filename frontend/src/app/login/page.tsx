@@ -15,7 +15,7 @@ export default function LoginPage() {
     setLoading(true);
     setMessage(null);
     try {
-      const tokens = await api<Tokens>("/accounts/login/", {
+      const tokens = await api<Tokens>("/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
       });
