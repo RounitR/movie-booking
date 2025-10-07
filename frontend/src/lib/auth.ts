@@ -19,7 +19,6 @@ export const setTokens = ({ access, refresh }: Tokens) => {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(ACCESS_KEY, access);
   window.localStorage.setItem(REFRESH_KEY, refresh);
-  // Notify current tab listeners that auth state changed
   window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
 };
 
@@ -27,6 +26,5 @@ export const clearTokens = () => {
   if (typeof window === "undefined") return;
   window.localStorage.removeItem(ACCESS_KEY);
   window.localStorage.removeItem(REFRESH_KEY);
-  // Notify current tab listeners that auth state changed
   window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
 };

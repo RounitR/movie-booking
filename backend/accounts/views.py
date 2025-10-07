@@ -8,10 +8,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_spectacular.utils import extend_schema, OpenApiExample
 
 class SignupView(APIView):
-    """
-    POST /signup
-    Body: { "username": "...", "password": "...", "email": "..." }
-    """
 
     @extend_schema(
         tags=["Accounts"],

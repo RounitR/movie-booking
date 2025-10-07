@@ -16,7 +16,6 @@ async function refreshAccessToken(): Promise<string | null> {
     const data = await res.json();
     const newAccess = data?.access;
     if (!newAccess) return null;
-    // Persist new access while keeping existing refresh
     setTokens({ access: newAccess, refresh });
     return newAccess;
   } catch {
@@ -47,7 +46,6 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
     if (newAccess) {
       res = await doFetch(newAccess);
     } else {
-      // Clear tokens when refresh fails
       clearTokens();
     }
   }

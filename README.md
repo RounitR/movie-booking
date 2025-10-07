@@ -1,4 +1,4 @@
-# Movie Booking – Full-Stack Assignment Submission
+# Movie Booking – Full-Stack
 
 A clean and secure Movie Ticket Booking System with a Django REST API and a Next.js frontend. This README provides setup, usage, API overview, testing, and submission artifacts to demonstrate all required flows.
 
@@ -23,10 +23,8 @@ A clean and secure Movie Ticket Booking System with a Django REST API and a Next
 2. Create virtualenv (optional) and install dependencies
    - python3 -m venv .venv && source .venv/bin/activate
    - pip install -r requirements.txt
-3. Apply migrations and seed demo data
+3. Apply migrations
    - python manage.py migrate
-   - python manage.py loaddata (optional) — or use seed command:
-   - python manage.py seed_demo
 4. Start dev server
    - python manage.py runserver 8010
 5. Swagger docs
@@ -72,16 +70,38 @@ Frontend uses NEXT_PUBLIC_API_BASE for API base URL.
 - Swagger: /swagger
 
 ## Screenshots
-Upload your screenshots into frontend/public/screenshots/ using the exact filenames below. The links will render on GitHub and will be served at http://localhost:3000/screenshots/<filename> during development.
 
-- Home page: [frontend/public/screenshots/home.png](frontend/public/screenshots/home.png)
-- Signup page: [frontend/public/screenshots/signup.png](frontend/public/screenshots/signup.png)
-- Login page: [frontend/public/screenshots/login.png](frontend/public/screenshots/login.png)
-- Movies page: [frontend/public/screenshots/movies.png](frontend/public/screenshots/movies.png)
-- Shows page: [frontend/public/screenshots/shows.png](frontend/public/screenshots/shows.png)
-- Book a Seat page: [frontend/public/screenshots/book-seat.png](frontend/public/screenshots/book-seat.png)
-- My Bookings page: [frontend/public/screenshots/my-bookings.png](frontend/public/screenshots/my-bookings.png)
-- Swagger UI: [frontend/public/screenshots/swagger.png](frontend/public/screenshots/swagger.png)
+- Home page:
+
+  ![Home](frontend/public/screenshots/home.png)
+
+- Signup page:
+
+  ![Signup](frontend/public/screenshots/signup.png)
+
+- Login page:
+
+  ![Login](frontend/public/screenshots/login.png)
+
+- Movies page:
+
+  ![Movies](frontend/public/screenshots/movies.png)
+
+- Shows page:
+
+  ![Shows](frontend/public/screenshots/shows.png)
+
+- Book a Seat page:
+
+  ![Book a Seat](frontend/public/screenshots/book-seat.png)
+
+- My Bookings page:
+
+  ![My Bookings](frontend/public/screenshots/my-bookings.png)
+
+- Swagger UI:
+
+  ![Swagger](frontend/public/screenshots/swagger.png)
 
 ## Testing
 Run backend unit tests:
@@ -103,8 +123,6 @@ Expected output: tests pass (double booking prevention, seat range validation, c
 6. Visit /my-bookings to view and cancel a booking
 
 ## Known Limitations
-- SQLite concurrency is adequate for assignment demos; PostgreSQL recommended for production.
+- SQLite concurrency is adequate for demos; PostgreSQL recommended for production.
 - UI is intentionally simple, optimized for clarity and speed.
 
-## License
-For assignment submission only.

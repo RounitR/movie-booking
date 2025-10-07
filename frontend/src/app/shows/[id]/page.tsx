@@ -37,7 +37,6 @@ export default function ShowBookingPage({ params }: { params: Params }) {
 
   useEffect(() => {
     loadShow();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showId]);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -52,7 +51,6 @@ export default function ShowBookingPage({ params }: { params: Params }) {
       });
       setMessage(`Seat ${seat} booked successfully.`);
       setSeat("");
-      // Refresh show details to update seat map and availability
       await loadShow();
     } catch (err: any) {
       setMessage(err.message || "Booking failed");
