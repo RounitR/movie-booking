@@ -12,6 +12,7 @@ type Show = {
   screen_name: string;
   date_time: string;
   total_seats: number;
+  available_seats: number;
   movie: { id: number; title: string };
 };
 
@@ -43,7 +44,7 @@ export default function MovieShowsPage({ params }: { params: Params }) {
         {shows.map((s) => (
           <li key={s.id} className="border rounded p-4">
             <div className="font-medium">{s.movie.title} - {s.screen_name}</div>
-            <div className="text-sm text-gray-600">{new Date(s.date_time).toLocaleString()} · {s.total_seats} seats</div>
+            <div className="text-sm text-gray-600">{new Date(s.date_time).toLocaleString()} · {s.total_seats} total · {s.available_seats} available</div>
             <Link className="text-blue-600 hover:underline" href={`/shows/${s.id}`}>Book seat</Link>
           </li>
         ))}

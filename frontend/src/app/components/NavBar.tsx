@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAccessToken, clearTokens } from "@/lib/auth";
+import { getAccessToken, clearTokens, AUTH_CHANGE_EVENT } from "@/lib/auth";
 
 export default function NavBar() {
   const [authed, setAuthed] = useState(false);
@@ -12,8 +12,13 @@ export default function NavBar() {
   useEffect(() => {
     setAuthed(!!getAccessToken());
     const onStorage = () => setAuthed(!!getAccessToken());
+    const onAuthEvent = () => setAuthed(!!getAccessToken());
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener(AUTH_CHANGE_EVENT, onAuthEvent as EventListener);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(AUTH_CHANGE_EVENT, onAuthEvent as EventListener);
+    };
   }, []);
 
   const onLogout = () => {

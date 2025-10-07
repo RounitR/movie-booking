@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiExample, OpenApiParameter
 
 from .models import Movie, Show, Booking
-from .serializers import MovieSerializer, ShowSerializer, BookingSerializer, BookSeatRequestSerializer, CancelResponseSerializer
+from .serializers import MovieSerializer, ShowSerializer, BookingSerializer, BookSeatRequestSerializer, CancelResponseSerializer, ShowDetailSerializer
 
 class MoviesListView(generics.ListAPIView):
     queryset = Movie.objects.all().order_by("title")
@@ -44,6 +44,28 @@ class ShowsListView(generics.ListAPIView):
         if movie_id:
             qs = qs.filter(movie_id=movie_id)
         return qs
+
+class ShowDetailView(generics.RetrieveAPIView):
+    serializer_class = ShowDetailSerializer
+    permission_classes = [permissions.AllowAny]
+    lookup_url_kwarg = "show_id"
+
+    @extend_schema(
+        tags=["Bookings"],
+        summary="Show details including booked seats",
+        parameters=[
+            OpenApiParameter(
+                name="show_id",
+                description="ID of the show",
+                required=True,
+                type=int,
+                location=OpenApiParameter.PATH,
+            ),
+        ],
+        responses=ShowDetailSerializer,
+    )
+    def get_queryset(self):
+        return Show.objects.all().select_related("movie")
 
 class BookSeatView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -118,7 +140,7 @@ class CancelBookingView(APIView):
     def post(self, request, booking_id):
         with transaction.atomic():
             try:
-                booking = Booking.objects.select_for_update().get(id=booking_id, user=request.user)
+                booking = Booking.objects.select_for_update().get(id=booking_id, user=self.request.user)
             except Booking.DoesNotExist:
                 return Response({"detail": "Booking not found"}, status=status.HTTP_404_NOT_FOUND)
 

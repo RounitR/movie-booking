@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.env
+.venv/
+
+# Django
+/static/
+/media/
+
+# Node/Next.js
+node_modules/
+.next/
+.env.local
+
+# IDE
+.vscode/
+.DS_Store
+
+# Project docs not for commit
+roadmap.md
