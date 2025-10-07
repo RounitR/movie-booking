@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiExample, OpenApiParameter
 
 from .models import Movie, Show, Booking
-from .serializers import MovieSerializer, ShowSerializer, BookingSerializer, BookSeatRequestSerializer
+from .serializers import MovieSerializer, ShowSerializer, BookingSerializer, BookSeatRequestSerializer, CancelResponseSerializer
 
 class MoviesListView(generics.ListAPIView):
     queryset = Movie.objects.all().order_by("title")
@@ -113,7 +113,7 @@ class CancelBookingView(APIView):
                 location=OpenApiParameter.PATH,
             ),
         ],
-        responses={200: OpenApiExample("Cancel success", value={"detail": "Booking cancelled"})},
+        responses=CancelResponseSerializer,
     )
     def post(self, request, booking_id):
         with transaction.atomic():

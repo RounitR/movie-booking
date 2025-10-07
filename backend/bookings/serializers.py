@@ -23,3 +23,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
 class BookSeatRequestSerializer(serializers.Serializer):
     seat_number = serializers.IntegerField(min_value=1)
+
+
+class CancelResponseSerializer(serializers.Serializer):
+    detail = serializers.CharField()
