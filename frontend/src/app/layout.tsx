@@ -15,35 +15,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Movie Booking",
-  description: "Frontend for Movie Booking System",
+  description: "Book movies and manage your bookings",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <header className="w-full border-b border-black/[.08] dark:border-white/[.145] bg-background">
-          <nav className="mx-auto max-w-5xl flex items-center justify-between p-4">
-            <div className="flex items-center gap-3">
-              <Link href="/" className="font-semibold">Movie Booking</Link>
-              <span className="text-sm text-gray-500">Frontend</span>
-            </div>
-            <div className="flex gap-4 text-sm">
-              <Link href="/signup" className="hover:underline">Signup</Link>
-              <Link href="/login" className="hover:underline">Login</Link>
-              <Link href="/movies" className="hover:underline">Movies</Link>
-              <Link href="/my-bookings" className="hover:underline">My Bookings</Link>
-              <a href="http://localhost:8010/swagger/" target="_blank" rel="noreferrer" className="hover:underline">API Docs</a>
-            </div>
+      <body className={geistSans.variable + " " + geistMono.variable}>
+        <header className="p-4 border-b flex items-center justify-between">
+          <a href="/" className="font-semibold">Movie Booking</a>
+          <nav className="flex gap-4">
+            <a href="/movies">Movies</a>
+            <a href="/my-bookings">My Bookings</a>
+            <a href="/signup">Signup</a>
+            <a href="/login">Login</a>
+            <a href="http://localhost:8010/swagger/" target="_blank" rel="noreferrer">API Docs</a>
           </nav>
         </header>
-        <main className="mx-auto max-w-5xl p-6">
-          {children}
-        </main>
+        <main className="p-6 max-w-5xl mx-auto">{children}</main>
       </body>
     </html>
   );
